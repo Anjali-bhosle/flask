@@ -3,6 +3,7 @@ import numpy as np
 from flask import Flask,request,jsonify,render_template
 import  pandas as pd
 import joblib,pickle
+import os
 
 app = Flask(__name__)
 model = joblib.load('hotel.pkl')
