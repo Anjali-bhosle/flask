@@ -18,7 +18,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/predict',methods=['POST'])
-def y_predict():
+def predict():
     x_col = ['name',  'Check_in_year', 'Check_in_month', 'Check_in_day', 'Check_out_year', 'Check_out_month',
        'Check_out_day', 'city']
     
