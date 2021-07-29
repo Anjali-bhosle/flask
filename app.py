@@ -21,7 +21,7 @@ def y_predict():
     data = np.array([[x for x in request.form.values()]])
     data = sc.transform(data)
     
-    prediction = model.predict(data)
+    prediction = model.y_predict(data)
     
     print(prediction)
     return render_template('index.html',prediction_text=prediction)
