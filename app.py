@@ -3,9 +3,12 @@ import numpy as np
 from flask import Flask,request,jsonify,render_template
 import  pandas as pd
 import joblib,pickle
+import logging
 import os
 
 app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 model = joblib.load('hotel.pkl')
 sc = joblib.load('hotel_scalar.pkl')
 
