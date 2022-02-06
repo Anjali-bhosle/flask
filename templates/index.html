@@ -1,40 +1,184 @@
-
 <!DOCTYPE html>
 <html >
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
-  <title>ML API</title>
+  <title>Hotel Prediction</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  
+
+<style>
+
+select { 
+	width: 100%; 
+	margin-bottom: 10px; 
+	background: #fff;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #092756;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+}
+.login{
+top: 20%;
+}
+</style>
+<script>(function(w, d) { w.CollectId = "6118cab436b5b233b034906b"; var h = d.head || d.getElementsByTagName("head")[0]; var s = d.createElement("script"); s.setAttribute("type", "text/javascript"); s.async=true; s.setAttribute("src", "https://collectcdn.com/launcher.js"); h.appendChild(s); })(window, document);</script>
 </head>
 
 <body>
  <div class="login">
-	<h1>Predict Salary Analysis</h1>
+	  <h4>Hotel Prediction</h4>
+
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="city" placeholder="City" required="required" />
-        <input type="text" name="Check_in_date" placeholder="Check_in_date" required="required" />
-	<input type="text" name="Check_out_date" placeholder="Check_out_date" required="required" />
-        <input type="text" name="Check_in_date" placeholder="Check_in_date" required="required" />
-	<input type="text" name="location" placeholder="location" required="required" />
+    <form action="{{ url_for('y_predict')}}"method="post">
+    
+    
+		<input type="number" name="name" placeholder="Name" required="required" />
+		
+		<select  name="city" required="required" >
+    		<option value="">Select City </option>
+    		<option value='Hyderabad'>Hyderabad</option>
+    		<option value='Munna'>Munna</option>
+    		<option value='Mumbai'>Mumbai</option>
+    		<option value='Pune'>Pune</option>
+    		<option value='Kochi'>Kochi</option>
+    		<option value='Nagpur'>Nagpur</option>
+    		<option value='Rishikesh'>Rishikesh</option>
+    		<option value='Chennai'>Chennai</option>
+    		<option value='Banglore'>Banglore</option>
+    		<option value='Goa'>Goa</option>
+    		<option value='Kolkata'>Kolkata</option>
+    		<option value='New Delhi'>New Delhi</option>
+    		<option value='Kullu'>Kullu</option>
+    		<option value='Leh'>Leh</option>
+    		<option value='Bhopal'>Bhopal</option>
+    		<option value='Gurgaon'>Gurgaon</option>
+    		<option value='Noida'>Noida</option>
+    		<option value='Varanasi'>Varanasi</option>
+    		<option value='Tirupati, Andhra Pradesh, India'>Tirupati, Andhra Pradesh, India</option>
+    		<option value='Visakhapatnam, Andhra Pradesh, India'>Visakhapatnam, Andhra Pradesh, India</option>
+    		<option value='Jaipur'>Jaipur</option>
+    		<option value='Lucknow'>Lucknow</option>
+    		<option value='Chandigarh'>Chandigarh</option>
+    		<option value='Ahmedabad'>Ahmedabad</option>
+    	</select>
+    		
+	<input type="number" name="Distance to City centre(km)" placeholder="Distance to City centre(km)" required="required" />
+        
+        <input type="number" name="Distance to Airport(km)" placeholder="Distance to Airport(km)" required="required" />
+	    
+        <select name="Pool" required="required" />
+            <option value="">Select Pool </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Free parking" required="required" />
+            <option value="">Select Free Parking </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Airport transfer" required="required" />
+            <option value="">Select Airport Transfer </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Spa" required="required" />
+            <option value="">Select Spa </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+       
+        <select name="Restaurant" required="required" />
+            <option value="">Select Restaurent </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Gym" required="required" />
+            <option value="">Select Gym </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Bar" required="required" />
+            <option value="">Select Bar </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Bathtub" required="required" />
+            <option value="">Select Bathtub </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Meeting Facilities" required="required" />
+            <option value="">Select Meeting Facilities </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Connecting rooms available" required="required" />
+            <option value="">Select Connecting rooms available </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Pet-friendly" required="required" />
+            <option value="">Select Pet-friendly </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Kitchen" required="required" />
+            <option value="">Select Kitchen </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
+        
+        <select name="Internet access" required="required" />
+            <option value="">Select Internet Access </option>
+            <option value='yes'>yes</option>
+            <option value='no'>no</option>
+        </select>
 
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-    </form>
+        <input type="number" name="Check_in_year" placeholder="Check_in_year" required="required" />
+        
+        <input type="number" name="Check_in_month" placeholder="Check_in_month" required="required" />
+        
+        <input type="number" name="Check_in_day" placeholder="Check_in_day" required="required" />
+        
+        <input type="number" name="Check_out_year" placeholder="Check_out_year" required="required" />
+        
+        <input type="number" name="Check_out_month" placeholder="Check_in_month" required="required" />
+        
+        <input type="number" name="Check_out_day" placeholder="Check_in_day" required="required" />
+        
+        
+        
+        <button type="submit" class="btn btn-warning btn-block btn-large">Predict</button>
 
+
+    {{ prediction_text }}
    <br>
    <br>
-   {{ prediction_text }}
 
  </div>
 
 
 </body>
 </html>
+
